@@ -1,5 +1,12 @@
 {:paths ["src" "resources"]
- :deps {org.clojure/clojure {:mvn/version "1.12.4"}}
+ :deps {com.github.seancorfield/honeysql {:mvn/version "2.7.1364"}
+        com.github.seancorfield/logging4j2 {:mvn/version "1.0.5"}
+        com.github.seancorfield/next.jdbc {:mvn/version "1.3.1070"}
+        net.wirelabs/jmaps-example {:mvn/version "1.4.4-SNAPSHOT"}
+        net.wirelabs/jmaps-viewer {:mvn/version "1.4.4-SNAPSHOT"}
+        org.clojure/clojure {:mvn/version "1.12.4"}
+        org.xerial/sqlite-jdbc {:mvn/version "3.47.1.0"}
+        seesaw/seesaw {:mvn/version "1.5.1-SNAPSHOT"}}
  :aliases
  {:run-m {:main-opts ["-m" "ca.cawala.seesaw-maps"]}
   :run-x {:ns-default ca.cawala.seesaw-maps
