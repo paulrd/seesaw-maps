@@ -5,7 +5,7 @@
         net.wirelabs/jmaps-example {:mvn/version "1.4.4-SNAPSHOT"}
         net.wirelabs/jmaps-viewer {:mvn/version "1.4.4-SNAPSHOT"}
         org.clojure/clojure {:mvn/version "1.12.4"}
-        org.xerial/sqlite-jdbc {:mvn/version "3.47.1.0"}
+        org.xerial/sqlite-jdbc {:mvn/version "3.51.1.0"}
         seesaw/seesaw {:mvn/version "1.5.1-SNAPSHOT"}}
  :aliases
  {:run-m {:main-opts ["-m" "ca.cawala.seesaw-maps"]}
