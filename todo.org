@@ -1,0 +1,42 @@
+* Get jmaps to remember map position
+ The problem is that when I change the image scaling, a listener is triggered
+ such that the view returns to the home position. A simple solution would be to
+ save the map's center position and zoom and restore it after rescaling the
+ images.
+** Classes
+  It appears that the RecenterMapListener is getting triggered because I have to
+  repack my frame. This triggers the componentResized method on this listener.
+  This in turn calls mapViewer.centerMapOrBestFit().
+*** MouseHandler
+   This is a promising class to look at as it needs to manipulate the current
+   map view based on mouse actions such as scrolling the mouse wheel (zoom) and
+   click/drag of the mouse to change the position.
+
+   topLeftCorner field of this class is used to keep track of the map's
+   position. It is a Point. It is originally set to
+   mapViewer.getTopLeftCornerPoint(). topLeftCornerPoint field member of
+   MapViewer is used in the paint calls. So updating it will allow us to keep
+   our position.
+
+   I tried restoring the topLeftCornerPoint, but the Listener fires after the
+   work I do on the AWT Thread. I might be able to wait until after that trigger
+   fires to restore the window position. I might just try fixing the listener or
+   disabling it temporarily. I'll try removing the listener then adding it back.
+   That idea doesn't seem to work. It seems like this listener needs to be
+   triggered to allow my scaled version to be seen. I can try altering the
+   listener or adding to it.
+
+   I think what is missing is that I need to update my topLeftCornerPoint value
+   correctly. I might be able to get away with not doing other things like pack!
+   since pack was probably just forcing the listener to fire. Otherwise, just
+   updating the topLeftCornerPoint seems to trigger a repaint. I can also call
+   repaint directly as it should work now with a correct topLeftCornerPoint
+   value set.
+
+   I am going to look at the MouseHandler again to see how to update the
+   topLeftCornerPoint correctly. I just have to get the pixel value of the
+   center of the screen using getWidth/2 and getHeight/2 on the JPanel (mapViewer).
+   - Then convert that to a pixel value by adding it to the topLeftCornerPoint.
+   - Then convert this pixel value to Lat/Lon Coordinate.
+   - Then call centerOnLocation(Coordinate).
+   - repaint
