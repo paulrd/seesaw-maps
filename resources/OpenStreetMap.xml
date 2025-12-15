@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<map xmlns="http://www.wirelabs.net/jmaps/model/map">
+    <name>OpenStreetMap</name>
+    <layer>
+        <name>Open Street Map</name>
+        <maxZoom>19</maxZoom>
+        <type>XYZ</type>
+        <url>https://tile.openstreetmap.org/{z}/{x}/{y}.png</url>
+    </layer>
+    <copyright>© OpenStreetMap Contributors, Creative Commons Attribution-ShareAlike 2.0</copyright>
+</map>
