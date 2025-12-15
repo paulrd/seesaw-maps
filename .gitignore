@@ -24,6 +24,7 @@
 *.jar
 *.swp
 *~
+*.log
 .clj-kondo
 .lsp
 /checkouts
