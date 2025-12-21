@@ -29,8 +29,7 @@
                       (/ (.getHeight map-viewer) 2.0))
         mid-coordinate (.pixelToLatLon base-layer mid (.getZoom map-viewer))]
     (doto base-layer (.setImageScale scale) (.setTileSize tile-size))
-    (.centerOnLocation map-viewer mid-coordinate)
-    (.repaint map-viewer)))
+    (doto map-viewer (.centerOnLocation mid-coordinate) .repaint)))
 
 (defn zoom-tiles [map-viewer zoom]
   (let [base-layer (-> map-viewer .getCurrentMap .getBaseLayer)
@@ -41,16 +40,6 @@
                       (/ (.getHeight map-viewer) 2.0))
         mid-coordinate (.pixelToLatLon base-layer mid (.getZoom map-viewer))]
     (doto map-viewer (.setZoom zoom) (.centerOnLocation mid-coordinate) .repaint)))
-            ;;     Point2D p = baseLayer.latLonToPixel(mouseLatLon, zoom);
-
-            ;;     // update top left corner to new zoom
-            ;;     updateTopLeftCornerPoint(evt, p);
-            ;;     // update mouse point
-            ;;     updateMousePoint(evt);
-
-            ;;     // set new zoom
-            ;;     mapViewer.setZoom(zoom);
-            ;;     mapViewer.repaint();
 
 (defn sliders [map-viewer]
   (let [i-zoom-slider (s/slider :id :i-zoom :orientation :vertical :major-tick-spacing 1
