@@ -1,7 +1,10 @@
 {:paths ["src" "resources"]
- :deps {com.github.seancorfield/honeysql {:mvn/version "2.7.1364"}
+ :deps {andersmurphy/sqlite4clj
+        {:git/url "https://github.com/andersmurphy/sqlite4clj"
+         :git/sha "37992a98a7d4b8c8913eccb7c4c50f954a33b202"}
+        com.github.seancorfield/honeysql {:mvn/version "2.7.1364"}
         com.github.seancorfield/logging4j2 {:mvn/version "1.0.5"}
-        com.github.seancorfield/next.jdbc {:mvn/version "1.3.1070"}
+        ;;com.github.seancorfield/next.jdbc {:mvn/version "1.3.1070"}
         com.formdev/flatlaf {:mvn/version "3.7"}
         net.wirelabs/jmaps-example {:mvn/version "1.4.4-SNAPSHOT"}
         net.wirelabs/jmaps-viewer {:mvn/version "1.4.4-SNAPSHOT"}
