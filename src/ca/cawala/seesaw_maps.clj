@@ -1,6 +1,9 @@
 (ns ca.cawala.seesaw-maps
   (:require
    [clojure.java.io :as io]
+   [honey.sql :as s]
+   [next.jdbc :as jdbc]
+   [next.jdbc.result-set :as rs]
    [org.corfield.logging4j2 :as logger]
    [seesaw.bind :as b]
    [seesaw.core :as s]
@@ -12,6 +15,14 @@
    [net.wirelabs.jmaps.map.painters Painter]
    [net.wirelabs.jmaps.map.geo Coordinate])
   (:gen-class))
+
+(def db (d/init-db! "trie.db" {:pool-size 4}))
+(def ds (jdbc/get-datasource db))
+
+(defn get-region [path]
+  (jdbc/execute! ds (s/format {:select [:*] :from [:region]
+                               :where [:like :materialized-path path]})
+                 {:builder-fn rs/as-unqualified-kebab-maps}))
 
 (defn greet
   "Callable entry point to the application."
