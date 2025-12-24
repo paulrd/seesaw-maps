@@ -18,6 +18,14 @@
   [data]
   (println (str "Hello, " (or (:name data) "World") "!")))
 
+(defn convert-to-px [map-viewer point]
+  (let [zoom (.getZoom map-viewer)
+        pt (-> map-viewer .getCurrentMap .getBaseLayer (.latLonToPixel point zoom))
+        top-left-corner-x (.x (.getTopLeftCornerPoint map-viewer))
+        top-left-corner-y (.y (.getTopLeftCornerPoint map-viewer))]
+    (.setLocation pt (- (.getX pt) top-left-corner-x) (- (.getY pt) top-left-corner-y))
+    pt))
+
 (def box-painter
   (proxy [Painter] []
     (doPaint [graphics map-viewer width height]
@@ -74,13 +82,7 @@
                          ["Tile Zoom" ""]
                          [t-zoom-slider "height :400:"]])))
 
-(defn convert-to-px [map-viewer point]
-  (let [zoom (.getZoom map-viewer)
-        pt (-> map-viewer .getCurrentMap .getBaseLayer (.latLonToPixel point zoom))
-        top-left-corner-x (.x (.getTopLeftCornerPoint map-viewer))
-        top-left-corner-y (.y (.getTopLeftCornerPoint map-viewer))]
-    (.setLocation pt (- (.getX pt) top-left-corner-x) (- (.getY pt) top-left-corner-y))
-    pt))
+
 
 
 (defn show-boxes [coordinates]
