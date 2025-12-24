@@ -30,3 +30,4 @@
 /checkouts
 /classes
 /target
+*.db
